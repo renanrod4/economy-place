@@ -1,26 +1,103 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Economy Place — Design Tokens (from Figma Make) */
+@theme {
+  /* Colors */
+  --color-roxo-900: #3b0a73;
+  --color-roxo-700: #5a0e9e;
+  --color-roxo-500: #7a1fc4;
+  --color-amarelo-500: #ffc20e;
+  --color-amarelo-400: #ffd23f;
+  --color-laranja-500: #ff9d00;
+  --color-vermelho-500: #ee2a1f;
+  --color-vermelho-700: #c41c13;
+  --color-verde-500: #1fa855;
+  --color-verde-700: #12763a;
+  --color-verde-100: #e2f6e9;
+  --color-lilas-100: #efe3fb;
+  --color-lilas-200: #e0cdf6;
+  --color-fundo: #fbf8ff;
+  --color-tinta: #22163a;
+  --color-cinza-600: #625a74;
+  --color-cinza-400: #a49db3;
+  --color-cinza-200: #e7e2ef;
+  --color-neutro-img: #f4f1f8;
+
+  /* Fonts */
+  --font-display: var(--font-baloo-2);
+  --font-body: var(--font-nunito);
+
+  /* Radius */
+  --radius-campo: 10px;
+  --radius-card: 18px;
+  --radius-pill: 999px;
+
+  /* Shadows - 3D solid shadows (brand signature) */
+  --shadow-3d-sm: 0 4px 0 rgba(59, 10, 115, 0.18);
+  --shadow-3d: 0 6px 0 rgba(59, 10, 115, 0.18);
+  --shadow-3d-lg: 0 10px 0 rgba(59, 10, 115, 0.18);
+  --shadow-btn-amarelo: 0 4px 0 #c98f00;
+  --shadow-btn-roxo: 0 4px 0 #2a0653;
+  --shadow-btn-vermelho: 0 4px 0 #9e150d;
+
+  /* Breakpoints */
+  --breakpoint-sm: 480px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: var(--font-body);
+    background: var(--color-fundo);
+    color: var(--color-tinta);
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    line-height: 1.1;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-amarelo-500);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 2px var(--color-roxo-900);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .shimmer {
+    background: linear-gradient(90deg, #ede6f6 0%, #f7f2fc 50%, #ede6f6 100%);
+    background-size: 200% 100%;
+    animation: shimmer 1.4s infinite linear;
+  }
+  @keyframes shimmer {
+    to {
+      background-position: -200% 0;
+    }
+  }
+  .float-y {
+    animation: floaty 5s ease-in-out infinite;
+  }
+  @keyframes floaty {
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .shimmer,
+    .float-y {
+      animation: none;
+    }
+  }
 }
